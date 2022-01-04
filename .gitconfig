@@ -6,9 +6,6 @@
 	precomposeunicode = yes
 	preloadindex = yes
 	quotepath = no
-[user]
-	name = nalbam
-	email = me@nalbam.com
 [log]
 	date = iso8601
 [color]
