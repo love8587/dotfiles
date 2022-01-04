@@ -1,0 +1,43 @@
+#!/bin/bash
+
+alias a='aws'
+alias k='kubectl'
+alias h='helm'
+
+alias am='aws sts get-caller-identity | jq .'
+
+alias av='aws-vault'
+alias ave='export AWS_VAULT= && av exec'
+alias ava='export AWS_VAULT= && av exec daangn/alpha --'
+alias avd='export AWS_VAULT= && av exec daangn/data --'
+alias avp='export AWS_VAULT= && av exec daangn/prod --'
+
+alias tf='terraform'
+alias tfc='rm -rf .terraform && rm -rf .terraform.lock.hcl'
+alias tfi='tf init'
+alias tff='tf init && tf fmt'
+alias tfp='tf init && tf fmt && tf plan'
+alias tfa='tf init && tf fmt && tf apply'
+alias tfd='tf init && tf destroy'
+alias tfs='tf init && tf state'
+alias tfg='tf init && tf graph'
+alias tfo='tf init && tf output'
+
+alias tfim='tf init && tf import'
+
+alias tfsl='tf init && tf state list'
+alias tfss='tf init && tf state show'
+alias tfsr='tf init && tf state rm'
+
+alias tfdoc="terraform-docs markdown"
+
+# alias docker='podman'
+
+alias py='python'
+alias py3='python3'
+
+alias xs='cd'
+alias vf='cd'
+alias ㅊㅇ='cd'
+
+alias dt='date -u +"%Y-%m-%dT%H:%M:%SZ"'
