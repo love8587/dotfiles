@@ -1,10 +1,12 @@
 #!/bin/bash
 
-OS_NAME="$(uname | awk '{print tolower($0)}')"
+OS_NAME="$(uname | awk '{print tolower($0)}' | cut -d'-' -f1)"
 OS_ARCH="$(uname -m)"
 
 if [ "${OS_NAME}" == "darwin" ]; then
   INSTALLER="brew"
+elif [ "${OS_NAME}" == "mingw64_nt" ]; then
+  INSTALLER="choco"
 fi
 
 ################################################################################
@@ -124,7 +126,8 @@ mkdir -p ~/.aws
 mkdir -p ~/.ssh
 
 # ssh keygen
-[ ! -f ~/.ssh/id_rsa ] && ssh-keygen -q -t ed25519 -f ~/.ssh/id_ed25519 -N ''
+[ ! -f ~/.ssh/id_rsa ] && ssh-keygen -q -f ~/.ssh/id_rsa -N ''
+[ ! -f ~/.ssh/id_ed25519 ] && ssh-keygen -q -t ed25519 -f ~/.ssh/id_ed25519 -N ''
 
 # ssh config
 if [ ! -f ~/.ssh/config ]; then
@@ -147,12 +150,6 @@ fi
 if [ ! -f ~/.vimrc ]; then
   curl -fsSL -o ~/.vimrc https://raw.githubusercontent.com/daangn/dotfiles/main/.vimrc
 fi
-
-# Brewfile
-if [ -f ~/Brewfile ] && [ ! -f ~/Brewfile.backup ]; then
-  cp ~/Brewfile ~/Brewfile.backup
-fi
-curl -fsSL -o ~/Brewfile https://raw.githubusercontent.com/daangn/dotfiles/main/Brewfile
 
 # git config
 GIT_USERNAME="$(git config --global user.name)"
@@ -203,6 +200,12 @@ if [ "${INSTALLER}" == "brew" ]; then
     brew link --force gnu-getopt
   fi
 
+  # Brewfile
+  if [ -f ~/Brewfile ] && [ ! -f ~/Brewfile.backup ]; then
+    cp ~/Brewfile ~/Brewfile.backup
+  fi
+  curl -fsSL -o ~/Brewfile https://raw.githubusercontent.com/daangn/dotfiles/main/Brewfile
+
   _command "brew bundle..."
   brew bundle --file=~/Brewfile
 
@@ -214,6 +217,11 @@ if [ "${INSTALLER}" == "brew" ]; then
 
   _command "brew cleanup..."
   brew cleanup
+fi
+
+# .bashrc
+if [ ! -f ~/.bashrc ]; then
+  curl -fsSL -o ~/.bashrc https://raw.githubusercontent.com/daangn/dotfiles/main/.bashrc
 fi
 
 # .zshrc
