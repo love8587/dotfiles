@@ -4,6 +4,7 @@ tap "homebrew/core"
 
 brew "argo"
 brew "argocd"
+brew "aws-iam-authenticator"
 brew "awscli"
 brew "curl"
 brew "eksctl"
