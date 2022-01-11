@@ -1,5 +1,3 @@
-#!/bin/bash
-
 alias a='aws'
 alias k='kubectl'
 alias h='helm'
