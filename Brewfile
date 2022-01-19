@@ -54,3 +54,5 @@ cask "alfred"
 cask "mongodb-compass"
 cask "gitkraken"
 cask "obsidian"
+cask "gas-mask"
+
